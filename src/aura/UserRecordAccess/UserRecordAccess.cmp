@@ -1,0 +1,114 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" controller="UserRecordAccessController" >
+    <aura:attribute name="spinner" type="Boolean" default="false" />
+    <aura:attribute name="hideListTimer" type="Boolean" default="false"/>
+    <aura:attribute name="showList" type="Boolean" default="false"/>
+    <aura:attribute name="userText" type="String" />    
+    <aura:attribute name="userList" type="UserRecordAccess[]" default="[]"/>
+    <aura:attribute name="userId" type="String" />
+    <aura:attribute name="target" type="User" />
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="HasReadAccess" type="Boolean" />
+    <aura:attribute name="HasEditAccess" type="Boolean" />
+    <aura:attribute name="HasDeleteAccess" type="Boolean" />
+    <aura:attribute name="HasTransferAccess" type="Boolean" />
+    <aura:attribute name="HasAllAccess" type="Boolean" />
+    <aura:handler name="init" value="{! this }" action="{!c.onInit}"/>
+    <aura:handler name="change" value="{! v.showList }" action="{!c.onChangeUserList}"/>
+    
+    <article class="slds-card">
+        <aura:if isTrue="{!v.spinner}">
+	        <lightning:spinner alternativeText="Loading" size="small" />
+        </aura:if>
+        <div class="slds-card__header slds-grid">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                <div class="slds-media__figure">
+                    <span class="slds-icon_container slds-icon-standard-account" title="UserAccessRecord">
+                        <lightning:icon iconName="custom:custom5" size="small" alternativeText="UserAccessRecord"/>
+                        <span class="slds-assistive-text">UserAccessRecord</span>
+                    </span>
+                </div>
+                <div class="slds-media__body">
+                    <h2 class="slds-card__header-title">
+                        <span>UserAccessRecord</span>
+                    </h2>
+                </div>
+            </header>
+        </div>
+        <div class="slds-card__body slds-card__body_inner" >
+            <div id="user1" 
+                 onmouseleave="{! c.onMouseLeave }"
+                 onmouseenter="{! c.onMouseEnter }">
+                <div id="user2" class="slds-form-element slds-form-element_stacked slds-is-editing">
+                    <label id="user3-1" class="slds-form-element__label" for="user_name">ユーザ</label>
+                    <div  id="user3-2" class="slds-form-element__control">
+                        <div  id="user4" class="slds-combobox_container">
+                            <div aura:id="user-combobox"  id="user-combobox"
+                                 class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click" 
+                                 aria-expanded="false" aria-haspopup="listbox" 
+                                 role="combobox">
+                                <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right" 
+                                     role="none"
+                                      id="user6-1" 
+                                     >
+                                    <input type="text" 
+                                           id="user_name" aura:id="user_name" 
+                                           class="slds-input slds-combobox__input slds-combobox__input-value"
+                                           aria-autocomplete="list" aria-controls="usder-list" 
+                                           role="textbox" 
+                                           autoComplete="off" placeholder="ユーザを検索..."
+                                           onblur="{! c.onBlur }"
+                                           onfocus="{! c.onFocus }"
+                                           onchange="{! c.onChange }"
+                                           value="" />
+			                        <lightning:buttonIcon
+                                                          class="innerIcon"
+                                                          ariaControls ="usder-list" ariaExpanded ="false" 
+                                                          iconName="utility:search" variant="brand" 
+                                                          onclick="{! c.onSearchClick }" 
+                                                          alternativeText="ユーザを検索..." />
+                                </div>
+                                <div aura:id="user-list" id="user-list"
+                                     class="slds-dropdown slds-dropdown_length-with-icon-7 slds-dropdown_fluid" 
+                                     role="listbox">
+                                    <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+                                        <aura:iteration items="{! v.userList }" var="userItem">
+                                            <li class="userItem" onclick="{! c.onClickUser}" data-uid="{! userItem.Id }">
+                                                <lightning:icon iconName="standard:user" alternativeText="User" title="User" />
+                                                <span>{! userItem.Name }</span>
+                                            </li>
+                                        </aura:iteration>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div><span>{! v.target.Name }</span>が持つ、このレコードの権限</div>
+                <ul>
+                    <li style="position:relative">HasReadAccess
+                            <lightning:helptext content="ユーザにレコードに対する参照アクセス権があるか (true)、否か (false) を示します。" />
+                        : {! v.HasReadAccess}
+                    </li >
+                    <li style="position:relative">HasEditAccess
+                            <lightning:helptext content="ユーザにレコードに対する編集アクセス権があるか (true)、否か (false) を示します。" />
+                        : {! v.HasEditAccess}
+                    </li >
+                    <li style="position:relative">HasDeleteAccess
+                            <lightning:helptext content="ユーザにレコードに対する削除アクセス権があるか (true)、否か (false) を示します。" />
+                        : {! v.HasDeleteAccess}
+                    </li >
+                    <li style="position:relative">HasTransferAccess
+                            <lightning:helptext content="ユーザにレコードに対する転送アクセス権があるか (true)、否か (false) を示します。" />
+                        : {! v.HasTransferAccess}
+                    </li >
+                    <li style="position:relative">HasAllAccess
+                            <lightning:helptext content="ユーザがレコードを共有できるかどうかを示します。" />
+                        : {! v.HasAllAccess}
+                    </li >
+                </ul>
+            </div>
+        </div>
+    </article>
+</aura:component>

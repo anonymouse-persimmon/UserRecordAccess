@@ -1,0 +1,10 @@
+.THIS .innerIcon {
+    position: absolute;
+    right: 0;
+}
+.THIS .userItem {
+    background-color: lavender;
+}
+.THIS .userItem:hover {
+    background-color: royalblue;
+}
