@@ -22,14 +22,14 @@
         <div class="slds-card__header slds-grid">
             <header class="slds-media slds-media_center slds-has-flexi-truncate">
                 <div class="slds-media__figure">
-                    <span class="slds-icon_container slds-icon-standard-account" title="UserAccessRecord">
-                        <lightning:icon iconName="custom:custom5" size="small" alternativeText="UserAccessRecord"/>
-                        <span class="slds-assistive-text">UserAccessRecord</span>
+                    <span class="slds-icon_container slds-icon-standard-account" title="UserRecordAccess">
+                        <lightning:icon iconName="custom:custom5" size="small" alternativeText="UserRecordAccess"/>
+                        <span class="slds-assistive-text">UserRecordAccess</span>
                     </span>
                 </div>
                 <div class="slds-media__body">
                     <h2 class="slds-card__header-title">
-                        <span>UserAccessRecord</span>
+                        <span>UserRecordAccess</span>
                     </h2>
                 </div>
             </header>
